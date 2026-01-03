@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora</title>
+
+<style>
+body {
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.calculadora {
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  width: 260px;
+}
+
+#display {
+  width: 100%;
+  height: 50px;
+  background: #000;
+  color: #0f0;
+  font-size: 28px;
+  text-align: right;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+/* ÍCONE DA CALCULADORA */
+#statusIcon {
+  width: 28px;
+  margin-bottom: 10px;
+}
+
+.botoes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+button {
+  height: 45px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: white;
+  cursor: pointer;
+}
+
+button.operador {
+  background: #ff9500;
+}
+
+button.igual {
+  background: #34c759;
+  grid-column: span 2;
+}
+
+button.clear {
+  background: #ff3b30;
+}
+
+button.modo {
+  background: #555;
+  grid-column: span 4;
+}
+</style>
+</head>
+
+<body>
+
+<div class="calculadora">
+
+  <div id="display">0</div>
+
+  <!-- ÍCONE REAL DE CALCULADORA -->
+  <img id="statusIcon" src="calculadora.png">
+
+  <div class="botoes">
+    <button onclick="limpar()" class="clear">C</button>
+    <button onclick="digitar('/')">÷</button>
+    <button onclick="digitar('*')">×</button>
+    <button onclick="digitar('-')" class="operador">−</button>
+
+    <button onclick="digitar('7')">7</button>
+    <button onclick="digitar('8')">8</button>
+    <button onclick="digitar('9')">9</button>
+    <button onclick="digitar('+')" class="operador">+</button>
+
+    <button onclick="digitar('4')">4</button>
+    <button onclick="digitar('5')">5</button>
+    <button onclick="digitar('6')">6</button>
+
+    <button onclick="digitar('1')">1</button>
+    <button onclick="digitar('2')">2</button>
+    <button onclick="digitar('3')">3</button>
+
+    <button onclick="digitar('0')">0</button>
+    <button onclick="digitar('.')">.</button>
+    <button onclick="calcular()" class="igual">=</button>
+
+    <button onclick="abrirPesquisa()" class="modo">Modo Pesquisa</button>
+  </div>
+</div>
+
+<script>
+let display = document.getElementById("display");
+let statusIcon = document.getElementById("statusIcon");
+
+function digitar(valor) {
+  if (display.innerText === "0") {
+    display.innerText = valor;
+  } else {
+    display.innerText += valor;
+  }
+}
+
+function limpar() {
+  display.innerText = "0";
+  statusIcon.src = "calculadora.png"; //  ÍCONE NORMAL
+}
+
+function calcular() {
+  try {
+    display.innerText = eval(display.innerText);
+    statusIcon.src = "calculadora.png"; //  ÍCONE NORMAL
+  } catch {
+    display.innerText = "Erro";
+    statusIcon.src = "erro.png"; //  ÍCONE MUDA AQUI
+  }
+}
+
+function abrirPesquisa() {
+  window.open("https://www.google.com", "_blank");
+}
+</script>
+
+</body>
+</html>
